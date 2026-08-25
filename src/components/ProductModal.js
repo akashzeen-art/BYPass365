@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PRODUCT_THEMES } from "../productThemes";
 import { ModalVisual } from "./ProductVisuals";
 import "./ProductModal.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MODAL_DATA = {
   1: {
@@ -17,22 +21,39 @@ const MODAL_DATA = {
       { icon: "⚡", title: "WireGuard Protocol",           desc: "Blazing-fast tunnels with iron-clad security." },
     ],
     stats: [["8", "Servers"], ["4", "Continents"], ["Windows", "& Android"], ["0", "Logs Stored"]],
-    plans: [
-      { name: "Monthly", price: "₹299", per: "/mo", badge: "" },
-      { name: "Annual",  price: "₹199", per: "/mo", badge: "Best Value" },
-      { name: "2-Year",  price: "₹149", per: "/mo", badge: "Save 50%" },
-    ],
   },
 };
+
+function enableMobileNormalizeScroll() {
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    ScrollTrigger.normalizeScroll({
+      allowNestedScroll: true,
+      lockAxis: false,
+      type: "touch,wheel,pointer",
+    });
+  }
+}
 
 export default function ProductModal({ product, onClose }) {
   const data  = MODAL_DATA[product?.id];
   const theme = PRODUCT_THEMES[product?.id];
   const isLight = theme?.mode === "light";
+  const panelRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    if (product) document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
+    if (!product) return;
+
+    // GSAP normalizeScroll blocks touch inside overlays — disable while modal is open
+    ScrollTrigger.normalizeScroll(false);
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      enableMobileNormalizeScroll();
+    };
   }, [product]);
 
   useEffect(() => {
@@ -49,9 +70,6 @@ export default function ProductModal({ product, onClose }) {
     );
   }
 
-  const btnTextColor = isLight ? "#fff" : "#000";
-  const planBtnInactiveColor = isLight ? theme.accent : theme.accent;
-
   return (
     <AnimatePresence>
       {product && (
@@ -66,19 +84,30 @@ export default function ProductModal({ product, onClose }) {
           />
 
           <motion.div
+            ref={panelRef}
             className={`pm__panel${isLight ? " pm__panel--light" : ""}`}
             style={{ background: theme.bg }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            onAnimationComplete={() => {
+              // iOS: transform on parent breaks overflow scroll — clear after open
+              const el = panelRef.current;
+              if (el && product) {
+                el.style.transform = "none";
+              }
+              if (scrollRef.current) {
+                scrollRef.current.scrollTop = 0;
+              }
+            }}
           >
             <div className="pm__orb pm__orb--1" style={{ background: theme.orb1 }} />
             <div className="pm__orb pm__orb--2" style={{ background: theme.orb2 }} />
 
             <button className={`pm__close${isLight ? " pm__close--light" : ""}`} onClick={onClose} aria-label="Close">✕</button>
 
-            <div className="pm__scroll">
+            <div className="pm__scroll" ref={scrollRef}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -147,46 +176,6 @@ export default function ProductModal({ product, onClose }) {
                       <p className="pm__card-title" style={{ color: theme.accent }}>{h.title}</p>
                       <p className="pm__card-desc">{h.desc}</p>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="pm__divider" style={{ background: `linear-gradient(90deg, ${theme.accent}, transparent)` }} />
-
-              <h3 className="pm__section-title">Choose Your Plan</h3>
-              <div className="pm__plans">
-                {data.plans.map((plan, i) => (
-                  <motion.div
-                    key={i}
-                    className={"pm__plan" + (plan.badge === "Best Value" || plan.badge === "Most Popular" || plan.badge === "Windows & Android" ? " pm__plan--featured" : "")}
-                    style={{
-                      borderColor: plan.badge ? theme.accent + "66" : theme.accent + "22",
-                      background: plan.badge
-                        ? theme.accent + (isLight ? "18" : "10")
-                        : isLight ? "rgba(255,255,255,0.7)" : theme.accent + "05",
-                    }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + i * 0.08 }}
-                  >
-                    {plan.badge && (
-                      <span className="pm__plan-badge" style={{ background: theme.accent, color: btnTextColor }}>{plan.badge}</span>
-                    )}
-                    <p className="pm__plan-name">{plan.name}</p>
-                    <div className="pm__plan-price">
-                      <span className="pm__plan-num" style={{ color: theme.accent }}>{plan.price}</span>
-                      <span className="pm__plan-per">{plan.per}</span>
-                    </div>
-                    <button
-                      className="pm__plan-btn"
-                      style={{
-                        background: plan.badge ? theme.btnGradient : "transparent",
-                        borderColor: theme.accent + "66",
-                        color: plan.badge ? btnTextColor : planBtnInactiveColor,
-                      }}
-                    >
-                      Get Started
-                    </button>
                   </motion.div>
                 ))}
               </div>

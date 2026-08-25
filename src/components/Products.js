@@ -93,7 +93,7 @@ export default function Products({ onExplore, enabled = true }) {
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 640px)", () => {
-      ScrollTrigger.normalizeScroll({ allowNestedScroll: false, lockAxis: false, type: "touch,wheel,pointer" });
+      ScrollTrigger.normalizeScroll({ allowNestedScroll: true, lockAxis: false, type: "touch,wheel,pointer" });
 
       const ctx = gsap.context(() => {
         buildParallax(pinEl, refs, true);
