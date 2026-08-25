@@ -1,0 +1,1073 @@
+/* ══════════════════════════════════════
+   Panel visuals (Products scroll)
+   ══════════════════════════════════════ */
+.pv {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── VPN panel ── */
+.pv--vpn {
+  background: linear-gradient(160deg, #060d1f, #0c1630);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.pv__vpn-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.pv__vpn-phone {
+  position: relative;
+  z-index: 2;
+  width: 42%;
+  background: #0a1428;
+  border-radius: 22px;
+  border: 2px solid rgba(59,130,246,0.35);
+  padding: 8px 6px 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.15);
+}
+.pv__vpn-notch {
+  width: 36%;
+  height: 5px;
+  background: #1e293b;
+  border-radius: 3px;
+  margin: 0 auto 8px;
+}
+.pv__vpn-screen { text-align: center; padding: 4px 6px 8px; }
+.pv__vpn-appbar { font-size: 9px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.pv__vpn-status {
+  display: inline-block;
+  font-size: 7px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.pv__vpn-connect {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pv__vpn-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(59,130,246,0.5);
+  animation: pvRingPulse 2s ease-in-out infinite;
+}
+@keyframes pvRingPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.4; }
+}
+.pv__vpn-connect span { font-size: 18px; z-index: 1; }
+.pv__vpn-connect small { position: absolute; bottom: -14px; font-size: 7px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+.pv__vpn-ip {
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  padding: 6px 8px;
+  text-align: left;
+}
+.pv__vpn-ip span { display: block; font-size: 6px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+.pv__vpn-ip strong { display: block; font-size: 9px; color: #fff; font-family: monospace; }
+.pv__vpn-ip em { display: block; font-size: 7px; color: #f87171; font-style: normal; margin-top: 2px; }
+.pv__vpn-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.5px;
+}
+
+/* ── Antivirus panel ── */
+.pv--av {
+  background: linear-gradient(160deg, #140404, #2a0808);
+  border: 1px solid rgba(239,68,68,0.25);
+}
+.pv__av-shield {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pv__av-scan {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  mask: radial-gradient(transparent 55%, black 56%);
+  -webkit-mask: radial-gradient(transparent 55%, black 56%);
+  animation: pmSpinCW 3s linear infinite;
+}
+.pv__av-shield-inner {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: rgba(239,68,68,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  z-index: 2;
+}
+.pv__av-stats {
+  position: absolute;
+  bottom: 14px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+.pv__av-stat {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+}
+.pv__av-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/* ── WiFi panel ── */
+.pv--wifi {
+  background: linear-gradient(160deg, #eefbf4, #f4fdf8);
+  border: 1px solid rgba(16,185,129,0.2);
+}
+.pv__wifi-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.pv__wifi-hub {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.pv__wifi-hub-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+.pv__wifi-hub-label { font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.pv__wifi-device {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 6px 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  font-size: 16px;
+}
+.pv__wifi-device small { font-size: 8px; color: #64748b; font-weight: 600; }
+.pv__wifi-device--tl { top: 18%; left: 10%; }
+.pv__wifi-device--tr { top: 18%; right: 10%; }
+.pv__wifi-device--bl { bottom: 28%; left: 10%; }
+.pv__wifi-device--br { bottom: 28%; right: 10%; }
+.pv__wifi-speed {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+.pv__wifi-speed > div {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.pv__wifi-speed span { font-size: 7px; color: #94a3b8; font-weight: 600; display: block; }
+.pv__wifi-speed strong { font-size: 10px; color: #0f172a; font-weight: 800; }
+.pv__wifi-bar {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  margin: 4px 0;
+  overflow: hidden;
+}
+.pv__wifi-bar div { height: 100%; border-radius: 2px; }
+.pv__wifi-live {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(255,255,255,0.85);
+}
+
+/* ── OTT panel ── */
+.pv--ott {
+  background: linear-gradient(160deg, #0a0a12, #100818, #081018);
+  border: 1px solid rgba(168,85,247,0.28);
+}
+.pv__ott-glow {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 5%;
+  left: 15%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pv__ott-screen {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 10px 10px;
+}
+.pv__ott-hero-bar {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.pv__ott-hero-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.pv__ott-hero-meta {
+  font-size: 8px;
+  color: rgba(255,255,255,0.5);
+}
+.pv__ott-row {
+  position: absolute;
+  bottom: 36px;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+}
+.pv__ott-card {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid;
+  overflow: hidden;
+  background: rgba(0,0,0,0.45);
+}
+.pv__ott-poster {
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+}
+.pv__ott-play {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pv__ott-card > span:last-child {
+  display: block;
+  text-align: center;
+  font-size: 7px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  padding: 3px;
+}
+.pv__ott-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.6);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* ── Quiz panel ── */
+.pv--quiz {
+  background: linear-gradient(160deg, #0c0a1a, #1a1035);
+  border: 1px solid rgba(245,158,11,0.2);
+}
+.pv__quiz-timer {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.4);
+  z-index: 2;
+}
+.pv__quiz-timer span { color: rgba(255,255,255,0.45); margin-left: 6px; font-weight: 600; }
+.pv__quiz-podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  height: 55%;
+  padding-top: 20px;
+}
+.pv__quiz-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 52px;
+}
+.pv__quiz-bar {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6px;
+  font-size: 14px;
+  min-height: 30px;
+}
+.pv__quiz-bar-wrap strong { font-size: 9px; color: #fff; }
+.pv__quiz-bar-wrap small { font-size: 8px; color: rgba(255,255,255,0.45); }
+.pv__quiz-prize {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.45);
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════
+   Modal visuals
+   ══════════════════════════════════════ */
+.pmv {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* VPN modal */
+.pmv--vpn {
+  background: linear-gradient(160deg, #050b18, #0c1630);
+}
+.pmv__vpn-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.pmv__vpn-stars {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25), transparent);
+}
+.pmv__vpn-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  height: 100%;
+  padding: 20px 40px;
+}
+.pmv__vpn-phone {
+  width: 140px;
+  background: #0a1428;
+  border-radius: 28px;
+  border: 2px solid rgba(59,130,246,0.4);
+  padding: 10px 8px 14px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(59,130,246,0.2);
+  flex-shrink: 0;
+}
+.pmv__vpn-notch { width: 40%; height: 6px; background: #1e293b; border-radius: 3px; margin: 0 auto 10px; }
+.pmv__vpn-screen { text-align: center; }
+.pmv__vpn-appbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.pmv__vpn-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+.pmv__vpn-pill {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.pmv__vpn-connect {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pmv__vpn-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid;
+}
+.pmv__vpn-ring--1 { inset: 0; animation: pmSpinCW 6s linear infinite; }
+.pmv__vpn-ring--2 { inset: -10px; animation: pmSpinCCW 8s linear infinite; }
+.pmv__vpn-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  z-index: 2;
+  box-shadow: 0 0 30px rgba(59,130,246,0.5);
+}
+.pmv__vpn-connect small { position: absolute; bottom: -16px; font-size: 9px; color: rgba(255,255,255,0.45); }
+.pmv__vpn-ip {
+  background: rgba(0,0,0,0.45);
+  border-radius: 12px;
+  padding: 8px 10px;
+  text-align: left;
+}
+.pmv__vpn-ip span { display: block; font-size: 7px; color: rgba(255,255,255,0.35); letter-spacing: 0.8px; }
+.pmv__vpn-ip strong { display: block; font-size: 12px; color: #fff; font-family: monospace; margin: 2px 0; }
+.pmv__vpn-ip em { display: block; font-size: 9px; color: #f87171; font-style: normal; }
+.pmv__vpn-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pmv__vpn-chips span {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+}
+.pmv__vpn-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.5px;
+}
+
+/* Antivirus modal */
+.pmv--av {
+  background: linear-gradient(160deg, #140404, #2a0808);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pmv__av-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(239,68,68,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239,68,68,0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.pmv__av-center {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.pmv__av-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid;
+  animation: pmSpinCW 8s linear infinite;
+}
+.pmv__av-shield {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  z-index: 2;
+  box-shadow: 0 0 40px rgba(239,68,68,0.4);
+}
+.pmv__av-pulse {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 2px solid;
+  animation: pvRingPulse 2s ease-in-out infinite;
+}
+.pmv__av-nodes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pmv__av-node {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  animation: pmFloat 3s ease-in-out infinite;
+}
+.pmv__av-node:nth-child(1) { top: 18%; left: 5%; animation-delay: 0s; }
+.pmv__av-node:nth-child(2) { top: 18%; right: 5%; animation-delay: 0.6s; }
+.pmv__av-node:nth-child(3) { bottom: 18%; left: 5%; animation-delay: 1.2s; }
+.pmv__av-node:nth-child(4) { bottom: 18%; right: 5%; animation-delay: 1.8s; }
+.pmv__av-badge {
+  position: absolute;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(0,0,0,0.55);
+  z-index: 3;
+}
+.pmv__av-badge--tl { top: 14px; left: 14px; }
+.pmv__av-badge--br { bottom: 14px; right: 14px; }
+
+/* WiFi modal */
+.pmv--wifi {
+  background: linear-gradient(160deg, #eefbf4, #f4fdf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.pmv__wifi-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.pmv__wifi-dashboard {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+}
+.pmv__wifi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+.pmv__wifi-live {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.pmv__wifi-body {
+  position: relative;
+  height: 120px;
+  margin-bottom: 14px;
+}
+.pmv__wifi-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 2;
+}
+.pmv__wifi-node {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.pmv__wifi-node--1 { top: 10%; left: 15%; }
+.pmv__wifi-node--2 { top: 10%; right: 15%; }
+.pmv__wifi-node--3 { bottom: 10%; left: 15%; }
+.pmv__wifi-node--4 { bottom: 10%; right: 15%; }
+.pmv__wifi-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.pmv__wifi-speeds {
+  display: flex;
+  gap: 16px;
+}
+.pmv__wifi-speeds > div { flex: 1; }
+.pmv__wifi-speeds span { font-size: 10px; color: #94a3b8; font-weight: 600; }
+.pmv__wifi-speeds strong { font-size: 14px; color: #0f172a; font-weight: 800; display: block; margin-top: 2px; }
+.pmv__wifi-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  margin: 6px 0 4px;
+  overflow: hidden;
+}
+.pmv__wifi-bar div { height: 100%; border-radius: 3px; }
+.pmv__wifi-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(255,255,255,0.9);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* OTT modal */
+.pmv--ott {
+  background: linear-gradient(160deg, #0a0a12, #100818, #081018);
+  padding: 20px 24px;
+}
+.pmv__ott-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pmv__ott-layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  align-items: stretch;
+}
+.pmv__ott-featured {
+  flex: 1.3;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(168,85,247,0.22);
+}
+.pmv__ott-now {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.pmv__ott-featured h4 { font-size: 22px; font-weight: 800; color: #fff; margin: 0 0 4px; }
+.pmv__ott-featured p { font-size: 11px; color: rgba(255,255,255,0.6); margin: 0 0 10px; }
+.pmv__ott-progress {
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.pmv__ott-progress div { height: 100%; border-radius: 2px; }
+.pmv__ott-strip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pmv__ott-tile {
+  flex: 1;
+  border-radius: 12px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,0.45);
+}
+.pmv__ott-tile-bg { position: absolute; inset: 0; }
+.pmv__ott-tile span { font-size: 18px; z-index: 1; }
+.pmv__ott-tile small { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); z-index: 1; flex: 1; }
+.pmv__ott-tile-play {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: #fff;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.pmv__ott-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.6);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* Quiz modal */
+.pmv--quiz {
+  background: linear-gradient(160deg, #0c0a1a, #1a1035);
+  padding: 16px 20px;
+}
+.pmv__quiz-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pmv__quiz-board {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 16px;
+  height: 100%;
+}
+.pmv__quiz-q {
+  flex: 1.3;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 16px;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+}
+.pmv__quiz-q > span { font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
+.pmv__quiz-q p { font-size: 14px; font-weight: 700; color: #fff; margin: 0 0 12px; line-height: 1.4; }
+.pmv__quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
+.pmv__quiz-opt {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.04);
+}
+.pmv__quiz-opt--correct { color: #fff; font-weight: 800; }
+.pmv__quiz-rank {
+  flex: 1;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 14px;
+  background: rgba(0,0,0,0.35);
+}
+.pmv__quiz-rank h5 { font-size: 12px; margin: 0 0 12px; }
+.pmv__quiz-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.pmv__quiz-row strong { margin-left: auto; font-size: 13px; }
+.pmv__quiz-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 5px 16px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.5);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+@keyframes pmSpinCW  { to { transform: rotate(360deg); } }
+@keyframes pmSpinCCW { to { transform: rotate(-360deg); } }
+@keyframes pmFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 900px) {
+  .pmv { height: 220px; }
+  .pmv__vpn-wrap { gap: 16px; padding: 16px; }
+  .pmv__vpn-chips { display: none; }
+  .pmv__quiz-board { flex-direction: column; }
+  .pmv__ott-layout { flex-direction: column; }
+}
+
+@media (max-width: 560px) {
+  .pmv { height: 200px; }
+  .pmv__vpn-phone { width: 110px; }
+  .pmv__av-node:nth-child(2), .pmv__av-node:nth-child(4) { display: none; }
+}
+
+/* ── Mobile square mockups inside product cards ── */
+@media (max-width: 640px) {
+  .ps__visual-card .pv--wifi {
+    display: block;
+  }
+  .ps__visual-card .pv__wifi-hub {
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 2px;
+  }
+  .ps__visual-card .pv__wifi-hub-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+  .ps__visual-card .pv__wifi-hub-label {
+    font-size: 7px;
+  }
+  .ps__visual-card .pv__wifi-device {
+    padding: 4px 6px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+  .ps__visual-card .pv__wifi-device small {
+    font-size: 6px;
+  }
+  .ps__visual-card .pv__wifi-device--tl { top: 10%; left: 5%; }
+  .ps__visual-card .pv__wifi-device--tr { top: 10%; right: 5%; }
+  .ps__visual-card .pv__wifi-device--bl { top: 38%; left: 5%; }
+  .ps__visual-card .pv__wifi-device--br { top: 38%; right: 5%; }
+  .ps__visual-card .pv__wifi-speed {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    gap: 8px;
+  }
+  .ps__visual-card .pv__wifi-speed > div {
+    aspect-ratio: 1 / 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 4px;
+    border-radius: 10px;
+  }
+  .ps__visual-card .pv__wifi-speed span {
+    font-size: 6px;
+  }
+  .ps__visual-card .pv__wifi-bar {
+    width: 100%;
+    margin: 3px 0;
+  }
+  .ps__visual-card .pv__wifi-speed strong {
+    font-size: 9px;
+  }
+  .ps__visual-card .pv__wifi-live {
+    top: 8px;
+    left: 8px;
+    font-size: 7px;
+    padding: 3px 7px;
+    max-width: calc(100% - 16px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ps__visual-card .pv--vpn .pv__vpn-phone {
+    width: 52%;
+  }
+  .ps__visual-card .pv--vpn .pv__vpn-badge {
+    font-size: 7px;
+    padding: 4px 8px;
+  }
+
+  .ps__visual-card .pv--av .pv__av-shield-inner {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+  .ps__visual-card .pv--av .pv__av-scan {
+    width: 88px;
+    height: 88px;
+  }
+  .ps__visual-card .pv__av-stats {
+    gap: 4px;
+  }
+  .ps__visual-card .pv__av-stat {
+    font-size: 7px;
+    padding: 4px 6px;
+  }
+
+  .ps__visual-card .pv__ott-screen {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 6px 8px;
+  }
+  .ps__visual-card .pv__ott-row {
+    bottom: 28px;
+    left: 8px;
+    right: 8px;
+    gap: 4px;
+  }
+  .ps__visual-card .pv__ott-badge {
+    font-size: 7px;
+    padding: 3px 8px;
+    bottom: 8px;
+  }
+
+  .ps__visual-card .pv__quiz-podium {
+    transform: scale(0.85);
+  }
+  .ps__visual-card .pv__quiz-timer {
+    font-size: 8px;
+    top: 8px;
+    left: 8px;
+  }
+}
