@@ -266,8 +266,8 @@ export default function PrivacyModal({ open, onClose }) {
                     </a>
                   </li>
                   <li>
-                    Address: Alphamovil Digital Solutions LLP, building number 123,
-                    sector 54, Suncity, Gurgaon, Haryana, 122011
+                    Address: Alphamovil Digital Solutions LLP, B-123, SUNCITY,
+                    SECTOR-54, Gurgaon, Haryana, 122011
                   </li>
                 </ul>
               </section>
