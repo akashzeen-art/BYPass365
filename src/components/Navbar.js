@@ -6,7 +6,21 @@ import "./Navbar.css";
 
 const links = ["Home", "Features", "Servers", "Products"];
 
-export default function Navbar() {
+const infoLinks = [
+  { label: "About Us", key: "about" },
+  { label: "Contact Us", key: "contact" },
+  { label: "Terms and Conditions", key: "terms" },
+  { label: "Privacy Policy", key: "privacy" },
+  { label: "Refund Policy", key: "refund" },
+];
+
+export default function Navbar({
+  onOpenAbout,
+  onOpenContact,
+  onOpenTerms,
+  onOpenPrivacy,
+  onOpenRefund,
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,6 +34,18 @@ export default function Navbar() {
     if (label === "Products") scrollToProductIndex(0);
     else scrollToSection(label);
     setMenuOpen(false);
+  };
+
+  const openInfo = (key) => {
+    setMenuOpen(false);
+    const openers = {
+      about: onOpenAbout,
+      contact: onOpenContact,
+      terms: onOpenTerms,
+      privacy: onOpenPrivacy,
+      refund: onOpenRefund,
+    };
+    openers[key]?.();
   };
 
   return (
@@ -40,18 +66,12 @@ export default function Navbar() {
           <img src={BRAND_LOGO} alt="BYPASS365" className="navbar__brand-logo" />
         </div>
 
-        <ul className="navbar__links">
-          {links.map(l => (
-            <li key={l}>
-              <button type="button" className="navbar__link" onClick={() => goTo(l)}>
-                <span>{l}</span>
-                <div className="navbar__link-line" />
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <button className="navbar__ham" onClick={() => setMenuOpen(!menuOpen)} aria-label="menu">
+        <button
+          className="navbar__ham"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="menu"
+          aria-expanded={menuOpen}
+        >
           <span className={menuOpen ? "ham-line open-1" : "ham-line"} />
           <span className={menuOpen ? "ham-line open-2" : "ham-line"} />
           <span className={menuOpen ? "ham-line open-3" : "ham-line"} />
@@ -64,13 +84,32 @@ export default function Navbar() {
             className="navbar__mobile"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            exit={{   opacity: 0, height: 0 }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {links.map(l => (
-              <div key={l} className="navbar__mobile-link" onClick={() => goTo(l)}>{l}</div>
+            {links.map((l) => (
+              <button
+                key={l}
+                type="button"
+                className="navbar__mobile-link"
+                onClick={() => goTo(l)}
+              >
+                {l}
+              </button>
             ))}
 
+            <div className="navbar__mobile-divider" />
+
+            {infoLinks.map(({ label, key }) => (
+              <button
+                key={key}
+                type="button"
+                className="navbar__mobile-link navbar__mobile-link--info"
+                onClick={() => openInfo(key)}
+              >
+                {label}
+              </button>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
