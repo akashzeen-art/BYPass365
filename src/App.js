@@ -18,12 +18,9 @@ import "./App.css";
 export default function App() {
   const [loaded, setLoaded] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
-  const [termsOpen, setTermsOpen] = useState(false);
-  const [privacyOpen, setPrivacyOpen] = useState(false);
-  const [refundOpen, setRefundOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
+  const [infoModal, setInfoModal] = useState(null);
   const handleDone = useCallback(() => setLoaded(true), []);
+  const closeInfo = useCallback(() => setInfoModal(null), []);
 
   return (
     <>
@@ -38,11 +35,11 @@ export default function App() {
         }}
       >
         <Navbar
-          onOpenAbout={() => setAboutOpen(true)}
-          onOpenContact={() => setContactOpen(true)}
-          onOpenTerms={() => setTermsOpen(true)}
-          onOpenPrivacy={() => setPrivacyOpen(true)}
-          onOpenRefund={() => setRefundOpen(true)}
+          onOpenAbout={() => setInfoModal("about")}
+          onOpenContact={() => setInfoModal("contact")}
+          onOpenTerms={() => setInfoModal("terms")}
+          onOpenPrivacy={() => setInfoModal("privacy")}
+          onOpenRefund={() => setInfoModal("refund")}
         />
         <Hero />
         <PhoneShowcase />
@@ -53,11 +50,11 @@ export default function App() {
       </div>
 
       <ProductModal product={activeProduct} onClose={() => setActiveProduct(null)} />
-      <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
-      <PrivacyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
-      <RefundModal open={refundOpen} onClose={() => setRefundOpen(false)} />
-      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <TermsModal open={infoModal === "terms"} onClose={closeInfo} />
+      <PrivacyModal open={infoModal === "privacy"} onClose={closeInfo} />
+      <RefundModal open={infoModal === "refund"} onClose={closeInfo} />
+      <AboutModal open={infoModal === "about"} onClose={closeInfo} />
+      <ContactModal open={infoModal === "contact"} onClose={closeInfo} />
     </>
   );
 }
